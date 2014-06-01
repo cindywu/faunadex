@@ -46,7 +46,7 @@ class PlantsController < ApplicationController
   # DELETE /plants/1.json
   def destroy
     @plant.destroy
-    redirect_to pins_url
+    redirect_to plants_url
     end
   end
 
