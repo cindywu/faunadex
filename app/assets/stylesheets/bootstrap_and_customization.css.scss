@@ -1,8 +1,10 @@
 @import 'bootstrap';
 
 .jumbotron {
+	.h8{
+		font-size:10px;
+	}
 	margin-bottom: 0px;
-	
 	background-image: url('/assets/plant_cell.jpg');
 	background-position: 0% 25%;
   background-size: cover;
