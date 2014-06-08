@@ -1,30 +1,23 @@
 class PlantsController < ApplicationController
   before_action :set_plant, only: [:show, :edit, :update, :destroy]
-
-  # GET /plants
-  # GET /plants.json
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   def index
     @plants = Plant.all
   end
 
-  # GET /plants/1
-  # GET /plants/1.json
   def show
   end
 
-  # GET /plants/new
   def new
-    @plant = Plant.new
+    @plant = current_user.Plants.build
   end
 
-  # GET /plants/1/edit
   def edit
   end
 
-  # POST /plants
-  # POST /plants.json
   def create
-    @plant = Plant.new(plant_params)
+    @plant = current_user.plants.build(plant_params)
     if @plant.save
       redirect_to @plant, notice: 'Plant was successfully created.'
     else
@@ -32,22 +25,17 @@ class PlantsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /plants/1
-  # PATCH/PUT /plants/1.json
   def update
     if @plant.update(plant_params)
-      redirect to @plant, notice: 'Plant was successfully updated'
+      redirect_to @plant, notice: 'Plant was successfully updated.'
     else
       render action: 'edit'
     end
   end
 
-  # DELETE /plants/1
-  # DELETE /plants/1.json
   def destroy
     @plant.destroy
     redirect_to plants_url
-    end
   end
 
   private
@@ -56,8 +44,13 @@ class PlantsController < ApplicationController
       @plant = Plant.find(params[:id])
     end
 
+    def correct_user
+      @plant = currentuser.plants.find_by(id: params[:id])
+      redirect_to pins_path, notice: "Not authorized to edit this plant" if @plant.nil?
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def plant_params
-      params.require(:plant).permit(:description)
+      params.require(:plant).permit(:description, :image)
     end
 end

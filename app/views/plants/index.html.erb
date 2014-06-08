@@ -3,8 +3,9 @@
 <table>
   <thead>
     <tr>
+      <th>Image</th>
       <th>Description</th>
-      <th></th>
+      <th>User</th>
       <th></th>
       <th></th>
     </tr>
@@ -13,10 +14,14 @@
   <tbody>
     <% @plants.each do |plant| %>
       <tr>
+        <td><%= image_tag plant.image.url(:medium) %></td>
         <td><%= plant.description %></td>
-        <td><%= link_to 'Show', plant %></td>
+        <td><%= plant.user.email if plant.user %></td>
+        <td><%= link_to 'Show', plant_path(plant) %></td>
+        <% if plant.user == current_user %>
         <td><%= link_to 'Edit', edit_plant_path(plant) %></td>
         <td><%= link_to 'Destroy', plant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +29,6 @@
 
 <br>
 
+<% if user_signed_in? %>
 <%= link_to 'New Plant', new_plant_path %>
+<% end %> 

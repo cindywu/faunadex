@@ -3,7 +3,10 @@
 <p>
   <strong>Description:</strong>
   <%= @plant.description %>
+  <%= image_tag @pin.image.url(:medium) %>
 </p>
 
-<%= link_to 'Edit', edit_plant_path(@plant) %> |
+<% if @plant.user == current_user %>
+	<%= link_to 'Edit', edit_plant_path(@plant) %> 
+<% end %>
 <%= link_to 'Back', plants_path %>
