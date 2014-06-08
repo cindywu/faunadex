@@ -10,7 +10,7 @@ class PlantsController < ApplicationController
   end
 
   def new
-    @plant = current_user.Plants.build
+    @plant = current_user.plants.build
   end
 
   def edit

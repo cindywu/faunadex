@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'aws-sdk', '~> 1.42.0'
+
 gem 'paperclip', '~> 3.0'
 
 gem 'devise'

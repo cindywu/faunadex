@@ -3,7 +3,7 @@
 <p>
   <strong>Description:</strong>
   <%= @plant.description %>
-  <%= image_tag @pin.image.url(:medium) %>
+  <%= image_tag @plant.image.url(:medium) %>
 </p>
 
 <% if @plant.user == current_user %>
